@@ -11,18 +11,7 @@ type Props = PropsWithChildren<{
 }>;
 
 export default function Tab({ children, defaultOpenKey }: Props) {
-  const [openKey, setOpenKey] = useState(() => {
-    if (defaultOpenKey) {
-      return defaultOpenKey;
-    }
-    const firstChild = Children.toArray(children)[0];
-
-    if (isTabItem(firstChild)) {
-      return firstChild.props.tabKey;
-    } else {
-      return undefined;
-    }
-  });
+  const [openKey, setOpenKey] = useState(defaultOpenKey);
 
   const tabs = useMemo(
     () =>
@@ -49,6 +38,7 @@ export default function Tab({ children, defaultOpenKey }: Props) {
             }}
             key={element.tabKey}
             style={{
+              padding: "5px 10px",
               backgroundColor:
                 element.tabKey === openKey || (openKey == null && index === 0)
                   ? "red"
@@ -59,7 +49,7 @@ export default function Tab({ children, defaultOpenKey }: Props) {
           </a>
         ))}
       </div>
-      <div>
+      <div style={{ padding: "10px" }}>
         {tabs.find((element) => element.tabKey === openKey)?.children ??
           Children.toArray(children)[0]}
       </div>
