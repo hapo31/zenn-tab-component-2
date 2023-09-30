@@ -17,7 +17,7 @@ jobs:
       - name: Build for pages
         run: |
           pnpm i --frozen-lockfile
-          pnpm build
+          pnpm build --base=/zenn-tab-component-2/
       - uses: actions/upload-pages-artifact@v2
         with:
           path: dist
